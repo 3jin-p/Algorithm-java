@@ -77,7 +77,7 @@ fabric.properties
 # *.ipr
 
 # Sonarlint plugin
-.idea
+.idea/*
 .idea/**/sonarlint/
 
 # SonarQube Plugin
