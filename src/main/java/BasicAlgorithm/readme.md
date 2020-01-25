@@ -1,8 +1,8 @@
-###기본적인  Algorithm 정리 디렉토리
+기본적인  Algorithm 정리 디렉토리
 --
 >
 
->#####Sorting
+>Sorting
 
 1.BubbleSort
 
@@ -10,13 +10,13 @@
 
 3.SelectionSort
 
->#####Divide & Conquer
+>Divide & Conquer
 
 1.Merge Sort
 
 2.Quick Sort
 
->#####Graph
+>Graph
 
 1.Binary Tree
 
