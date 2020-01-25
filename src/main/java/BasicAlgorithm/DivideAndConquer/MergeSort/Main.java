@@ -20,8 +20,8 @@ public class Main {
         }
     }
 
-    private static void merge(int arr[], int low, int mid, int high) {
-        System.out.println("merge");
+    private static void merge(int[] arr, int low, int mid, int high) {
+
         int i = low;
         int j = mid+1;
         int k = low;
@@ -33,22 +33,20 @@ public class Main {
             }else {
                 temp[k++] = arr[j++];
             }
-            System.out.println(Arrays.toString(temp));
         }
 
         while(i<=mid){
             temp[k++] = arr[i++];
-            System.out.println(Arrays.toString(temp));
         }
 
         while(j<=high){
             temp[k++] = arr[j++];
-            System.out.println(Arrays.toString(temp));
         }
-        System.out.println("End");
-        for(int index=low; index<k; index++){
-            arr[index] = temp[index];
-        }
+
+        /*
+        본 배열에 복제
+         */
+        if (k - low >= 0) System.arraycopy(temp, low, arr, low, k - low);
 
     }
 
