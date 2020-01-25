@@ -1,6 +1,18 @@
->###기본적인  Sorting Algorithm 정리 및 Java 구현
-1. Bubble Sort
-2. Insert Sort
-3. Selection Sort
-4. Merge Sort
-5. Quick Sort
+###기본적인  Algorithm 정리 디렉토리
+--
+>
+
+>#####Sorting
+
+1.BubbleSort
+
+2.InsertSort
+
+3.SelectionSort
+
+>#####Divide & Conquer
+
+1.Merge Sort
+
+2.Quick Sort
+
