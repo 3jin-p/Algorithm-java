@@ -16,3 +16,13 @@
 
 2.Quick Sort
 
+>#####Graph
+
+1.Binary Tree
+
+-preorder
+
+-inorder
+
+-postorder
+
