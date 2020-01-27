@@ -8,6 +8,8 @@ public class Main {
         int[] unSortedArray = {5,9,4,1,3,2,7,6,8,10};
         mergeSort(unSortedArray, 0 , unSortedArray.length - 1);
         System.out.println(Arrays.toString(unSortedArray));
+
+
     }
 
 
