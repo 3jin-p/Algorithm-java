@@ -1,4 +1,5 @@
-##Divide And Conquer (분할 정복)
+## Divide And Conquer (분할 정복)
+
 
 >분할 정복이란
 

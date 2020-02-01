@@ -41,7 +41,7 @@ public class Main {
 
         for(int i=0; i < N; i++) {
             if (!queue.isEmpty()) {
-                int x = queue.poll(); 
+                int x = queue.poll();
                 bw.write(x + " ");        //출력
 
                 for (int j = 0; j < graph.get(x).size(); j++) {    //큐에서 뺀 x의 인접리스트
