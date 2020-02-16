@@ -32,7 +32,11 @@ public class Main {
         }
 
         for(int i = 0; i < b - 1; i++) {
-            temp = ((a % 10) * temp) % 10;
+            if( ((a % 10) * temp) != 0){
+                temp = ((a % 10) * temp) % 10;
+            }else{
+                temp = 10;
+            }
         }
         bw.write(temp + "\n");
     }
