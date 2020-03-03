@@ -46,7 +46,7 @@ public class Main {
             numberOf2_FriendList.add(numberOf2_Friend);
         }
 
-        System.out.println(numberOf2_FriendList.toString());
+        System.out.println(Collections.max(numberOf2_FriendList));
     }
 
     private static boolean is2_Friend(int index_a, int index_b,  List<String[]> friendList) {
@@ -54,7 +54,7 @@ public class Main {
             return true;
         }else{
             for(int i = 0; i < friendList.size(); i++){
-                if (friendList.get(index_a)[i].equals("Y") && friendList.get(index_b)[i].equals("Y")){
+                if (friendList.get(i)[index_a].equals("Y") && friendList.get(i)[index_b].equals("Y")){
                     return true;
                 }
             }
