@@ -10,15 +10,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br =
                 new BufferedReader(new InputStreamReader(System.in));
-
+        StringTokenizer st;
 
         int count = Integer.parseInt(br.readLine());
 
-        StringTokenizer st;
-
         for(int x = 1; x <= count; x++){
-            st = new StringTokenizer(br.readLine());
 
+            st = new StringTokenizer(br.readLine());
             int lengthOfStick = Integer.parseInt(st.nextToken());
             int antNum = Integer.parseInt(st.nextToken());
             int[] locationOfAnts = new int[antNum];
