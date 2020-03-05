@@ -8,19 +8,23 @@ import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int count = sc.nextInt();
+        BufferedReader br =
+                new BufferedReader(new InputStreamReader(System.in));
+
+
+        int count = Integer.parseInt(br.readLine());
+
+        StringTokenizer st;
+
         for(int x = 1; x <= count; x++){
-            BufferedReader br =
-                    new BufferedReader(new InputStreamReader(System.in));
-            StringTokenizer st = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
 
             int lengthOfStick = Integer.parseInt(st.nextToken());
             int antNum = Integer.parseInt(st.nextToken());
             int[] locationOfAnts = new int[antNum];
 
             for(int i = 0; i < antNum; i++){
-                locationOfAnts[i] = sc.nextInt();
+                locationOfAnts[i] = Integer.parseInt(br.readLine());
             }
             findWorstAndBestCase(locationOfAnts, lengthOfStick);
         }
