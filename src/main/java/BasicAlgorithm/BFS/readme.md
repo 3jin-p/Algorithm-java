@@ -9,7 +9,8 @@
  
 ![너비 우선 탐색](bfs-example.png)
   
-- 구현은 큐를 이용하여 한다.  
+- 구현은 큐를 이용하여 한다. 
+[Source](https://github.com/3jin-p/Algorithm-java/tree/master/src/main/java/BaekJoon/B_1260) 
 
 >시간복잡도  
   
