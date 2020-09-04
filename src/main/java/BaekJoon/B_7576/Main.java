@@ -16,6 +16,8 @@ public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer stringTokenizer;
     static int[][] tomatoBox;
+    static int[] dx = new int[]{-1,1,0,0};
+    static int[] dy = new int[]{0,0,-1,1};
     static int m,n;
 
     public static void main(String[] args) throws IOException {
@@ -32,9 +34,11 @@ public class Main {
     // 토마토 박스 세팅
     private static void putTomatos(int m, int n) throws IOException {
         for(int i = 0; i < n; i++) {
-            int[] line = Arrays.stream(br.readLine().split(" "))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+            String[] arr = br.readLine().split(" ");
+            int[] line = new int[arr.length];
+            for(int j = 0; j < arr.length; j++) {
+                line[j] = Integer.parseInt(arr[j]);
+            }
 
             tomatoBox[i] = line;
         }
@@ -57,13 +61,9 @@ public class Main {
         // BFS 순회하며 박스스테이터스를 변경
         while (!queue.isEmpty()) {
             Node node = queue.poll();
-            tomatoBox[node.x][node.y] = 1;
             result = node.day;
 
-            if(!(node.x - 1 < 0) && tomatoBox[node.x-1][node.y] == 0) { queue.add(new Node(node.x - 1, node.y, node.day + 1));}
-            if((node.x + 1 < n - 1) && tomatoBox[node.x+1][node.y] == 0) { queue.add(new Node(node.x + 1, node.y, node.day + 1));}
-            if(!(node.y - 1 < 0) && tomatoBox[node.x][node.y - 1] == 0) { queue.add(new Node(node.x, node.y - 1, node.day + 1));}
-            if((node.y + 1 < m - 1) && tomatoBox[node.x][node.y+1] == 0) { queue.add(new Node(node.x, node.y + 1, node.day + 1));}
+            validate_and_add2Queue(queue, node);
         }
 
         // 각 박스칸들을 체킹 후 반환값 결정
@@ -77,6 +77,18 @@ public class Main {
         }
 
         System.out.println(result);
+    }
+
+    private static void validate_and_add2Queue(Queue<Node> queue, Node node) {
+        for(int i = 0; i < dx.length; i++){
+            if(!(node.x + dx[i] < 0) && (node.x + dx[i] < n)
+                    && !(node.y + dy[i] < 0) && (node.y + dy[i] < m)
+                    &&  tomatoBox[node.x + dx[i]][node.y + dy[i]] == 0) {
+                // 방문이 가능하고, 아직 익지않은 토마토가 있는 칸은 큐에 담음
+                tomatoBox[node.x+dx[i]][node.y+dy[i]] = 1;
+                queue.add(new Node(node.x + dx[i], node.y + dy[i], node.day + 1));
+            }
+        }
     }
 
     // 좌표값과 날짜 값을 지니는 큐에 담길 객체
