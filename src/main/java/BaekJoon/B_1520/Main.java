@@ -3,6 +3,7 @@ package BaekJoon.B_1520;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -19,68 +20,55 @@ public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer stringTokenizer;
     static int[][] graph;
-    static int numberOfRoute = 0;
-    static Position savePoint;
+    static int[][] visited;
+    static int[] dx = {1,-1,0,0};
+    static int[] dy = {0,0,1,-1};
 
     public static void main(String[] args) throws IOException {
         stringTokenizer = new StringTokenizer(br.readLine());
         m = Integer.parseInt(stringTokenizer.nextToken());
         n = Integer.parseInt(stringTokenizer.nextToken());
-
+        // init
         initGraph(m,n);
-        searchRoute(new Position());
-        System.out.println(numberOfRoute);
+        // Solution
+        System.out.println(searchRoute(0, 0));
     }
 
+    // 초기화
     public static void initGraph(int m, int n) throws IOException {
         graph = new int[m][n];
+        visited = new int[m][n];
+
         for(int i = 0; i < m; i++) {
             String[] array = br.readLine().split(" ");
-            graph[i] = convertStrArray_toIntArray(array);
+            Arrays.fill(visited[i], -1);
+            for(int j = 0; j < array.length; j++) {
+                graph[i][j] = Integer.parseInt(array[j]);
+            }
         }
     }
 
-    public static int[] convertStrArray_toIntArray(String[] strArr) {
-        int[] intArr = new int[n];
-        for(int j = 0; j < strArr.length; j++) {
-            intArr[j] = Integer.parseInt(strArr[j]);
+    // DFS + DP
+    public static int searchRoute(int x, int y) {
+        // 최종지점 도착시 1 리턴
+        if(x == m - 1 && y == n - 1) {
+            return 1;
         }
-        return intArr;
+        // 최종 지점에 도착했던 루트가 아닌 경우
+        if(visited[x][y] == -1) {
+            visited[x][y] = 0;
+            for(int i = 0; i < 4; i++) {
+                // 다음 경로가 갈 수 있는 루트면
+                if ((x+dx[i] >= 0 && x+dx[i] < m)
+                        && (y+dy[i] >= 0  && y+dy[i] < n)
+                        && graph[x][y] > graph[x+dx[i]][y+dy[i]]) {
+                    // 다음 경로의 값을 더해줌(최종지점에 도착했다면 +1이 될 것)
+                    visited[x][y] += searchRoute(x+dx[i], y+dy[i]);
+                }
+            }
+        }
+        //
+        return visited[x][y];
     }
 
-    public static void searchRoute(Position position) {
-        Stack<Position> savePoints = new Stack<>();
-        if(position.isEnd()) {
-            numberOfRoute += 1;
-        }
-        graph[position.x][position.y]
-    }
-
-    static final int LEFT = 0, RIGHT = 1, TOP = 2, BOTTOM = 3;
-
-    public static class Position {
-        int x = 0, y = 0;
-        boolean left = false, right = false, top = false, bottom = false;
-
-        Position() {};
-        Position(int x, int y) {
-            this.x = x;
-            this.y = y;
-            if(x - 1 < 0) { left = true;}
-            if(x + 1 > m) { right = true;}
-            if(y - 1 < 0) { top = true;}
-            if(y + 1 > n) { bottom = true;}
-        }
-
-        void getNext(int x, int y) {
-            this.x += x;
-            this.y += y;
-        }
-        void getAvailable() {
-
-        }
-        boolean isEnd() {
-            return x == m - 1 && y == n - 1;
-        }
-    }
 }
