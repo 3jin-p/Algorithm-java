@@ -23,11 +23,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
         input();
         solution();
-        List<Integer> list
+        int[] list
                 = Arrays.stream(dp)
                         .filter((el) -> el == -1)
-                        .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-        System.out.println(list.size());
+                        .toArray();
+        System.out.println(list.length);
 
     }
 
