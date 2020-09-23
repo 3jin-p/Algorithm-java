@@ -1,10 +1,10 @@
 package BaekJoon.B_11060;
 
+import java.util.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -23,6 +23,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         input();
         solution();
+        List<Integer> list
+                = Arrays.stream(dp)
+                        .filter((el) -> el == -1)
+                        .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        System.out.println(list.size());
+
     }
 
     private static void input() throws IOException {
