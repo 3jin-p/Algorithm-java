@@ -1,4 +1,4 @@
-package Programmers.TargetNumber;
+package Programmers.타겟넘버;
 
 import java.io.BufferedReader;
 import java.io.IOException;
