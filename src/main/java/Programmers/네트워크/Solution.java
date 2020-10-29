@@ -1,10 +1,8 @@
 package Programmers.네트워크;
 
+import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 /**
  * <b>파일 설명</b>
@@ -17,69 +15,50 @@ public class Solution {
     private static String[] GENRES;
 
     public static void main(String[] args) {
-        String[] genres = {"classic", "pop", "classic", "classic", "pop"};
-        int[] plays = {500, 600, 150, 800, 2500};
+        String[] genres = {"classic", "pop", "classic", "hoho", "pop"};
+        int[] plays = {500, 600, 150, 150, 2500};
         solution(genres, plays);
     }
-    public static int[] solution(String[] genres, int[] plays) {
-        int[] answer = new int[100];
-        List<Integer> answerList = new ArrayList<>();
-        GENRES = genres;
-        PLAYS = plays;
-        HashMap<String, HashMap<Integer, List<Integer>>> genreMap = new HashMap<>();
-        for(int i = 0; i < GENRES.length; i++) {
-            if (genreMap.containsKey(GENRES[i])) {
-                HashMap<Integer, List<Integer>> playMap = genreMap.get(GENRES[i]);
-                putSong(playMap, i);
-            }else {
-                HashMap<Integer, List<Integer>> playMap = new HashMap<>();
-                putSong(playMap, i);
-                genreMap.put(GENRES[i], playMap);
-            }
-        }
+    public static void solution(String[] genres, int[] plays) {
+       HashMap<String, List<Integer>> genreMap = new HashMap<>();
+       List<Integer> playList = Arrays.stream(plays).boxed().collect(Collectors.toList());
 
-        Set<String> genreKeySet = genreMap.keySet();
-        Iterator<String> genreIter = genreKeySet.iterator();
-        HashMap<Integer, String> genrePlaySumMap = new HashMap<>();
-        while (genreIter.hasNext()) {
-            String key = genreIter.next();
-            HashMap<Integer, List<Integer>> playMap = genreMap.get(key);
-            Set<Integer> playKeys = playMap.keySet();
-            int genrePlaySum = playKeys.stream().mapToInt(Integer::intValue).sum();
-            genrePlaySumMap.put(genrePlaySum, key);
-        }
+       for(int i = 0; i < genres.length; i++){
+           String genre = genres[i];
+           if(genreMap.containsKey(genre)) {
+               genreMap.get(genre).add(i);
+           }else {
+               List<Integer> indexes = new ArrayList<>();
+               indexes.add(i);
+               genreMap.put(genre,indexes);
+           }
+       }
 
-        Set<Integer> keys = genrePlaySumMap.keySet();
-        List<Integer> list = keys.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
-        for(int key : list){
-            String genre = genrePlaySumMap.get(key);
-            HashMap<Integer, List<Integer>> playMap = genreMap.get(genre);
-            Set<Integer> playCounts = playMap.keySet();
-            List<Integer> countList = playCounts.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
-            int index = 0;
-            for(int count : countList) {
-                if(index > 1) { break; }
-                List<Integer> numbers = playMap.get(count);
-                numbers.stream().sorted().forEach(answerList::add);
-                ++index;
-            }
-        }
+       Set<String> genreKeys = genreMap.keySet();
+       Iterator<String> genreKeyIter = genreKeys.iterator();
+       HashMap<Integer, String> genrePlaySumMap = new HashMap<>();
+       while (genreKeyIter.hasNext()) {
+           String genre = genreKeyIter.next();
+           List<Integer> playKeys = genreMap.get(genre);
+           int sum = 0;
+           for(int key : playKeys) {
+               sum += playList.get(key);
+           }
+           genrePlaySumMap.put(sum, genre);
+       }
 
-        answer = answerList.stream().mapToInt(Integer::intValue).toArray();
-        return answer;
+       Set<Integer> sums = genrePlaySumMap.keySet();
+       List<Integer> sumList = sums.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+       HashMap<Integer, Integer> song
+       for(int sum : sumList) {
+           String genre = genrePlaySumMap.get(sum);
+           List<Integer> songs = genreMap.get(genre);
+           for(int songKey : songs) {
+
+           }
+       }
+
     }
-
-    private static void putSong(HashMap<Integer, List<Integer>> playMap, int i) {
-        if(playMap.containsKey(PLAYS[i])){
-            playMap.get(PLAYS[i]).add(i);
-        }else {
-            List<Integer> songs = new ArrayList<>();
-            songs.add(i);
-            playMap.put(PLAYS[i], songs);
-        }
-    }
-
-
 
 
 }
