@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class Solution {
     public static void main(String[] args) {
-        System.out.println(solution(9));
+        System.out.println(solution(10));
     }
 
     public static String solution(int n) {
@@ -20,8 +20,7 @@ public class Solution {
         String[] cache = new String[]{"4" , "1" , "2"};
         while (n > 0) {
             answer = cache[n % 3] + answer;
-            n /= 3;
-            if(n % 3 == 0) n--;
+            n = (n - 1) / 3;
         }
         return answer;
     }
