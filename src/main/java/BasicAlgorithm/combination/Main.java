@@ -2,8 +2,6 @@ package BasicAlgorithm.combination;
 
 import java.util.Arrays;
 
-import static jdk.nashorn.internal.objects.Global.print;
-
 /**
  * <b>파일 설명</b>
  *
@@ -17,7 +15,6 @@ public class Main {
 
     static void combinamtion(int[] arr, boolean[] visited, int start, int n, int r) {
         if(r == 0) {
-            print(arr, visited);
             return;
         } else {
             for(int i = start; i < n; i++) {
